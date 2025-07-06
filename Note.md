@@ -1,3 +1,60 @@
+# 技术栈
+
+- RPC框架：Go-zero
+- 数据库：
+  - Mysql：核心业务数据存储
+  - Redis：缓存与分布式锁
+  - ELasticsearch：日志与搜索
+- 中间件：
+  - RabbitMQ：解耦服务间异步通信，支持订单超时取消、库存回滚
+  - EFK Stack：（日志系统）
+    - Fluentd：日志采集与转发。
+    - Elasticsearch：日志存储与索引。
+    - Kibana：日志可视化与分析。
+  - DTM：分布式事务中心
+- 服务发现：Consul/**Nacos**
+- 链路追踪：Jaeger/**SkyWalking**
+- 容器编排
+  - 开发环境
+    - 本地自运行
+    - Docker-compose：快速搭建本地多服务联调环境
+  - 生产环境
+    - Kubernetes（K8s）：提供容器编排、自动扩缩容、服务自愈能力，支持高可用部署。
+- 监控告警：
+  - Prometheus（指标采集）
+  - Grafana（可视化与告警）
+- CI/CD
+  - CI（持续集成）：GitHub Actions
+    - 功能：
+      - 代码检查：静态分析、单元测试。
+      - 镜像构建：自动构建Docker镜像并推送至镜像仓库。
+  - CD（持续部署）：
+    - Argo CD：基于Git仓库声明式配置，自动同步K8s集群状态，实现零停机部署。
+    - Argo Rollouts：渐进式交付控制器，提供高级部署策略（如金丝雀、蓝绿）和自动化流程控制。
+- 负载均衡
+  - Ingress-Nginx：负载均衡器与反向代理。
+- 第三方服务：
+  - 七牛云对象存储
+  - Cavator随机头像生成
+  - 支付宝支付
+
+# Go-Zero
+
+```shell
+export GOPROXY=https://goproxy.cn,direct
+go install github.com/zeromicro/go-zero/tools/goctl@latest
+xattr -d com.apple.quarantine /usr/local/bin/goctl
+goctl --version
+```
+
+# Jaeger
+
+```
+[ App SDK ] -> [ Jaeger Agent ] -> [ Jaeger Collector ] -> [ Storage ] -> [ Query / UI ]
+```
+
+# SkyWalking
+
 # DataBase Design
 
 ### Mysql
